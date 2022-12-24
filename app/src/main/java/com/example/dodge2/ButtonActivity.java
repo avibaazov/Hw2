@@ -34,9 +34,7 @@ public class ButtonActivity extends AppCompatActivity {
     private ShapeableImageView carPlacement2;//middle
     private ShapeableImageView carPlacement3;
     private ShapeableImageView carPlacement4;//last to the right
-    private ShapeableImageView asteroid1;
-    private ShapeableImageView asteroid2;
-    private ShapeableImageView asteroid3;
+
     final int DELAY = 1000;
     private Timer timer = new Timer();
     private ShapeableImageView[][] myImages;
@@ -281,9 +279,9 @@ public class ButtonActivity extends AppCompatActivity {
         carPlacement1.setVisibility(View.INVISIBLE);
         carPlacement3.setVisibility(View.INVISIBLE);
         carPlacement4.setVisibility(View.INVISIBLE);
-        asteroid1 = findViewById(R.id.m1);
-        asteroid2 = findViewById(R.id.m2);
-        asteroid3 = findViewById(R.id.m3);
+//        asteroid1 = findViewById(R.id.m1);
+//        asteroid2 = findViewById(R.id.m2);
+//        asteroid3 = findViewById(R.id.m3);
         score= findViewById(R.id.game_LBL_score);
     }
 

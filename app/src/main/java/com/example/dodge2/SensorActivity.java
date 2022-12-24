@@ -3,6 +3,7 @@ package com.example.dodge2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.Random;
 import java.util.Timer;
@@ -50,10 +52,13 @@ public class SensorActivity extends AppCompatActivity {
     private CollisionSound collisionSound;
     ImageView[] cars;
     private boolean gameOver;
+    private MaterialTextView score;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor);
+        score=findViewById(R.id.game_LBL_score);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         mSensorListener = new SensorEventListener() {
             @Override
@@ -135,11 +140,11 @@ public class SensorActivity extends AppCompatActivity {
     }
 
     private void startTimer() {
-        //not sure if here yet
-        int score = 0;
+
+
         SharedPreferences preferences = getSharedPreferences("score_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-
+        final int[] i = {0};
         startTime = System.currentTimeMillis();
         timer = new Timer();
         timer.scheduleAtFixedRate(
@@ -150,16 +155,18 @@ public class SensorActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
                                 if(gameOver==false) {
                                     randomlyAddMeteor();
                                     moveMeteor();
                                     checkCollision();
-
+                                    score.setText("Score: " + i[0]);
+                                    i[0]++;
                                 }
                                 if(gameOver==true){
                                     timer.cancel();
                                     timer.purge();
-                                    editor.putInt("score", score);
+                                    editor.putInt("score", i[0]);
                                     editor.apply();
                                     finish();
                                 }
@@ -360,5 +367,3 @@ public class SensorActivity extends AppCompatActivity {
         }
     }
 }
-
-
